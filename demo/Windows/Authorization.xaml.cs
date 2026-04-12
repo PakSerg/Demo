@@ -19,9 +19,9 @@ namespace demo.Windows
             if(!string.IsNullOrWhiteSpace(BoxLogin.Text) && !string.IsNullOrWhiteSpace(BoxPassword.Text))
             {
                 User user = context.Users.FirstOrDefault(q => q.Login == BoxLogin.Text && q.Password == BoxPassword.Text);
-                user.RoleNavigation = context.Roles.FirstOrDefault(q => q.Id == user.Role);
                 if (user != null)
                 {
+                    user.RoleNavigation = context.Roles.FirstOrDefault(q => q.Id == user.Role);
                     Main main = new Main(user);
                     main.Show();
                     this.Close();

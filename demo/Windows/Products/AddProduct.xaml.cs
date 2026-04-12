@@ -94,7 +94,10 @@ namespace demo.Windows.Products
                     return;
                 }
 
-                //File.Copy(openFile.FileName,Path.Combine(projPath, "Images"));
+                string imagesDir = Path.Combine(projPath, "Images");
+                Directory.CreateDirectory(imagesDir);
+                string destPath = Path.Combine(imagesDir, openFile.SafeFileName);
+                File.Copy(openFile.FileName, destPath, overwrite: true);
 
                 selectImage = select;
                 imageName = openFile.SafeFileName;

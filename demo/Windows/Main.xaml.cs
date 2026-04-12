@@ -109,7 +109,7 @@ namespace demo.Windows
             AddProduct add = new AddProduct();
             if (add.ShowDialog() == true)
             {
-                DrawProductItem(products);
+                Sort();
             }
         }
 

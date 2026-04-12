@@ -38,4 +38,7 @@ public partial class Product
     public virtual ICollection<OrderArticle> OrderArticles { get; set; } = new List<OrderArticle>();
 
     public virtual Supplier? Supplier { get; set; }
+
+    public string? Commentрт { get; set; }
+
 }

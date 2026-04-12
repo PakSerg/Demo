@@ -6,48 +6,47 @@
         xmlns:local="clr-namespace:demo.Windows.RequestWin"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Заявки" Height="600" Width="830">
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="5">
-            <Button Content=" Назад " Click="Button_exit" DockPanel.Dock="Left"/>
-            <StackPanel>
-
-            </StackPanel>
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Title="Заявки" Height="600" Width="830" MinWidth="600" MinHeight="400">
+    <DockPanel Margin="16" LastChildFill="True">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+            <Button Content="Назад" Padding="10,6" MinWidth="88" Click="Button_exit" DockPanel.Dock="Left"/>
+            <StackPanel/>
         </DockPanel>
-        <StackPanel Name="PanelBottomButton" Orientation="Horizontal" DockPanel.Dock="Bottom">
-            <Button Content="Добавить" Width="80" Margin="5" Click="Button_add_reques"/>
-            <Button Content="Удалить" Width="80" Margin="5" Click="Buutton_delite_reques"/>
+        <StackPanel Name="PanelBottomButton" Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="0,16,0,0">
+            <Button Content="Добавить" Width="88" Padding="10,6" Margin="0,0,8,0" Click="Button_add_reques"/>
+            <Button Content="Удалить" Width="88" Padding="10,6" Click="Buutton_delite_reques"/>
         </StackPanel>
-        <StackPanel>
-            <ListBox Name="BoxOrder"
-                     Height="500">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel Height="100">
-                            <Border DockPanel.Dock="Right"
-                                    BorderBrush="Black"
-                                    BorderThickness="1"
-                                    Margin="5"
-                                    MinWidth="120">
-                                <TextBlock Text="{Binding DeliveryDate, StringFormat='dd.MM.yyyy'}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"/>
-                            </Border>
-                            <Border BorderBrush="Black"
-                                    BorderThickness="1"
-                                    Margin="5"
-                                    Width="640">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Code}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Status.Status1}"/>
-                                    <TextBlock Text="{Binding PickupPoint.Adress}" />
-                                    <TextBlock Text="{Binding OrderDate, StringFormat='dd.MM.yyyy'}"/>
-                                </StackPanel>
-                            </Border>
-                        </DockPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+        <ListBox Name="BoxOrder" Padding="4" MinHeight="300" SnapsToDevicePixels="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Height="100" Margin="0,0,0,8" SnapsToDevicePixels="True">
+                        <Border DockPanel.Dock="Right"
+                                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                                BorderThickness="1"
+                                Margin="8,0,0,0"
+                                Padding="8"
+                                MinWidth="120">
+                            <TextBlock Text="{Binding DeliveryDate, StringFormat='dd.MM.yyyy'}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                                BorderThickness="1"
+                                Margin="0,0,8,0"
+                                Padding="8"
+                                Width="640">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Code}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Status.Status1}"/>
+                                <TextBlock Text="{Binding PickupPoint.Adress}" />
+                                <TextBlock Text="{Binding OrderDate, StringFormat='dd.MM.yyyy'}"/>
+                            </StackPanel>
+                        </Border>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </DockPanel>
 </Window>

@@ -6,52 +6,56 @@
         xmlns:local="clr-namespace:demo.Windows.RequestWin"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Изменение заявки" Height="350" Width="400">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Title="Изменение заявки" Height="420" Width="440" MinWidth="380">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24" MinWidth="360">
         <StackPanel Name="PanelOrder">
-            <StackPanel Orientation="Horizontal"
-                Margin="4">
-                <TextBox Name="BoxArc"
-                         Text="{Binding Code}"
-                         Width="120"/>
-                <TextBlock Text="Ариткул" 
-                         Margin="5 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                         Margin="4">
-                <ComboBox Name="BoxStatus" 
-                         Width="120"/>
-                <TextBlock Text="Статус заказа" 
-                         Margin="5 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                         Margin="4">
-                <TextBox Name="BoxDelivary" 
-                         Width="120"
-                         Text="{Binding PickupPoint.Adress}"/>
-                <TextBlock Text="Пункс выдачи" 
-                         Margin="5 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                         Margin="4">
-                <TextBox Name="BoxDateOrder" 
-                         Width="120"
-                         Text="{Binding OrderDate, StringFormat='dd.MM.yyyy'}"/>
-                <TextBlock Text="дата заказа" 
-                         Margin="5 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                         Margin="4">
-                <TextBox Name="BoxDateDelivery" 
-                         Width="120"
-                         Text="{Binding DeliveryDate, StringFormat='dd.MM.yyyy'}"/>
-                <TextBlock Text="дата выдачи" 
-                         Margin="5 0 0 0"/>
-            </StackPanel>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxArc" Text="{Binding Code}" Padding="6,4"/>
+                <TextBlock Grid.Column="1" Text="Артикул" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="BoxStatus" Padding="6,4"/>
+                <TextBlock Grid.Column="1" Text="Статус заказа" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="BoxPickupPoint" Padding="6,4"
+                          DisplayMemberPath="Adress"/>
+                <TextBlock Grid.Column="1" Text="Пункт выдачи" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxDateOrder" Padding="6,4" Text="{Binding OrderDate, StringFormat='dd.MM.yyyy'}"/>
+                <TextBlock Grid.Column="1" Text="дата заказа" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxDateDelivery" Padding="6,4" Text="{Binding DeliveryDate, StringFormat='dd.MM.yyyy'}"/>
+                <TextBlock Grid.Column="1" Text="дата выдачи" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Сохранить" Width="80" Click="Button_save" Margin="5"/>
-            <Button Content="Отмена" Width="80" Click="Button_exit" Margin="5"/>
+            <Button Content="Сохранить" MinWidth="96" Padding="10,6" Click="Button_save" Margin="0,0,8,0"/>
+            <Button Content="Отмена" MinWidth="96" Padding="10,6" Click="Button_exit"/>
         </StackPanel>
     </StackPanel>
 </Window>

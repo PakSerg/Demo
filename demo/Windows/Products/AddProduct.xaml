@@ -6,84 +6,98 @@
         xmlns:local="clr-namespace:demo.Windows.Products"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Добавление продукта" Height="450" Width="800">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
-                Orientation="Horizontal">
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <TextBox Width="120"
-                     Name="BoxName"/>
-                <Label Content="Название"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <ComboBox Width="120"
-                    Name="BoxCategory"
-                      SelectedIndex="0"/>
-                <Label Content="Категория товара"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <TextBox Width="120"
-                    Name="BoxDescription"/>
-                <Label Content="Описание"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <ComboBox Width="120"
-                    Name="BoxManufacturer"
-                    SelectedIndex="0"/>
-                <Label Content="Производитель"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <ComboBox Width="120"
-                        Name="BoxSupplier"
-                          SelectedIndex="0"/>
-                <Label Content="Поставщик"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <TextBox Width="120"
-                    Name="BoxPrice"/>
-                <Label Content="Цена"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <TextBox Width="120"
-                    Name="BoxUnit"/>
-                <Label Content="единица измерения,"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <TextBox Width="120"
-                    Name="BoxCount"/>
-                <Label Content="количество на складе"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" 
-                    Margin="5">
-                <TextBox Width="120"
-                    Name="BoxDiscount"/>
-                <Label Content="скидка"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="  Добавить продукт  "
-                    Click="ButtonAddProduct"
-                    Margin="5"/>
-                <Button Content="Отмена"
-                    Click="ButtonExit"
-                    Margin="5"/>
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Title="Добавление продукта" Height="500" Width="840" MinWidth="640">
+    <Grid Margin="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" MinWidth="320">
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxName" Padding="6,4"/>
+                <Label Grid.Column="1" Content="Название" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="BoxCategory" Padding="6,4" SelectedIndex="0"/>
+                <Label Grid.Column="1" Content="Категория товара" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxDescription" Padding="6,4"/>
+                <Label Grid.Column="1" Content="Описание" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="BoxManufacturer" Padding="6,4" SelectedIndex="0"/>
+                <Label Grid.Column="1" Content="Производитель" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" Name="BoxSupplier" Padding="6,4" SelectedIndex="0"/>
+                <Label Grid.Column="1" Content="Поставщик" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxPrice" Padding="6,4"/>
+                <Label Grid.Column="1" Content="Цена" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxUnit" Padding="6,4"/>
+                <Label Grid.Column="1" Content="единица измерения" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxCount" Padding="6,4"/>
+                <Label Grid.Column="1" Content="количество на складе" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="BoxDiscount" Padding="6,4"/>
+                <Label Grid.Column="1" Content="скидка" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Добавить продукт" Padding="12,6" MinWidth="160" Click="ButtonAddProduct" Margin="0,0,8,0"/>
+                <Button Content="Отмена" Padding="12,6" MinWidth="96" Click="ButtonExit"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel>
-            <Image Name="BoxImage" Height="200" Width="200"/>
-            <Button Content="добавить изображение" Margin="5"
-                    Click="ButtonLoadImage"/>
+
+        <StackPanel Grid.Column="2" VerticalAlignment="Top">
+            <Image Name="BoxImage" Height="200" Width="200" Margin="0,0,0,8"/>
+            <Button Content="добавить изображение" Padding="10,6" HorizontalAlignment="Left" Click="ButtonLoadImage"/>
         </StackPanel>
-        <!--<StackPanel Orientation="Horizontal">
-            <Button Content="Добавить" Width="80" Click="Button_add" Margin="5"/>
-            <Button Content="Отмена" Width="80" Click="Button_exit" Margin="5"/>
-        </StackPanel>-->
-    </StackPanel>
+    </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using demo.Data;
 using demo.Models;
+using System.Linq;
 using System.Windows;
 
 namespace demo.Windows.RequestWin
@@ -12,6 +13,7 @@ namespace demo.Windows.RequestWin
             InitializeComponent();
             context = new DemoContext();
             BoxStatus.ItemsSource = context.Statuses.ToList();
+            BoxPickupPoint.ItemsSource = context.PickupPoints.OrderBy(p => p.Adress).ToList();
         }
 
         private void Button_add(object sender, RoutedEventArgs e)
@@ -19,7 +21,7 @@ namespace demo.Windows.RequestWin
             if(!string.IsNullOrWhiteSpace(BoxDateDelivery.Text) && 
                 !string.IsNullOrWhiteSpace(BoxDateOrder.Text) && 
                 !string.IsNullOrWhiteSpace(BoxArc.Text) &&
-                !string.IsNullOrWhiteSpace(BoxDelivary.Text))
+                BoxPickupPoint.SelectedItem is PickupPoint pickup)
             {
                 try
                 {
@@ -31,7 +33,7 @@ namespace demo.Windows.RequestWin
                         OrderDate = DateTime.Parse(BoxDateOrder.Text),
                         DeliveryDate = DateTime.Parse(BoxDateDelivery.Text),
                         Code = double.Parse(BoxArc.Text),
-                        PickupPoint = context.PickupPoints.FirstOrDefault(q => q.Adress == BoxDelivary.Text),
+                        PickupPoint = pickup,
                         Status = BoxStatus.SelectedItem as Status
                     };
                     context.Orders.Add(order);

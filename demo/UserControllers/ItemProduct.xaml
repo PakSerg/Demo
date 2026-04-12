@@ -6,21 +6,26 @@
              xmlns:local="clr-namespace:demo.UserControllers"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="1200"
-             Background="White">
-    <DockPanel Width="1200">
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True">
+    <DockPanel Width="1200" Margin="4,4,4,12">
         <Border DockPanel.Dock="Left"
-                BorderBrush="Black"
                 BorderThickness="1"
-                Margin="5">
+                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                Margin="0,0,8,0"
+                Padding="4"
+                SnapsToDevicePixels="True">
             <Image Height="200" Width="300" Name="BoxImage"/>
         </Border>
         
         <Border DockPanel.Dock="Right"
-                BorderBrush="Black"
                 BorderThickness="1"
-                Margin="5"
+                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                Margin="8,0,0,0"
+                Padding="12"
                 MinWidth="250"
-                Name="BoxDiscount">
+                Name="BoxDiscount"
+                SnapsToDevicePixels="True">
             <TextBlock FontSize="40" 
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center">
@@ -29,39 +34,44 @@
             </TextBlock>
         </Border>
         
-        <Border BorderBrush="Black"
-                BorderThickness="1"
-                Margin="5">
-            <StackPanel Margin="5 0 0 0">
-                <TextBlock FontSize="25" FontWeight="Bold">
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                Padding="12"
+                SnapsToDevicePixels="True">
+            <StackPanel>
+                <TextBlock FontSize="22" FontWeight="Bold" Margin="0,0,0,4">
                     <Run Text="{Binding Manufacturer.Name}"/>
                     <Run Text=" | "/>
                     <Run Text="{Binding Name.Name}"/>
                 </TextBlock>
-                <TextBlock FontSize="18" TextWrapping="Wrap">
+                <TextBlock FontSize="16" TextWrapping="Wrap" Margin="0,0,0,4">
                     <Run Text="Описание товара: "/>
                     <Run Text="{Binding Description}"/>
                 </TextBlock>
-                <TextBlock FontSize="18">
+                <TextBlock FontSize="16" Margin="0,0,0,4">
                     <Run Text="Производитель: "/>
                     <Run Text="{Binding Manufacturer.Name}"/>
                 </TextBlock>
-                <TextBlock FontSize="18">
+                <TextBlock FontSize="16" Margin="0,0,0,4">
                     <Run Text="Поставщик: "/>
                     <Run Text="{Binding Supplier.Name}"/>
                 </TextBlock>
-                <TextBlock FontSize="18">
+                <TextBlock FontSize="16" Margin="0,0,0,4">
                     <Run Text="Цена: "/>
                     <Run Text="{Binding Price}" Name="BoxPrice"/>
                     <Run Name="BoxNewPrice"/>
                 </TextBlock>
-                <TextBlock FontSize="18">
-                    <Run Text="Единица измерения: "/>
+                <TextBlock FontSize="16" Margin="0,0,0,4">
+                    <Run Text="Единица измерения:куауа"/>
                     <Run Text="{Binding Unit}"/>
                 </TextBlock>
-                <TextBlock FontSize="18" Name="BoxCount">
+                <TextBlock FontSize="16" Name="BoxCount">
                     <Run Text="Количество на складе: "/>
                     <Run Text="{Binding Count}"/>
+                </TextBlock>
+                <TextBlock FontSize="16" Name="BoxCount">
+                    <Run Text="Комментарий: "/>
+                    <Run Text="{Binding Comment}"/>
                 </TextBlock>
             </StackPanel>
         </Border>

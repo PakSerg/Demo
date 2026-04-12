@@ -6,37 +6,37 @@
         xmlns:local="clr-namespace:demo.Windows"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Приложение" Height="850" Width="1300">
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="5">
-            <Button Content=" Выход " Click="Button_exit_user" DockPanel.Dock="Left"/>
-            <TextBlock DockPanel.Dock="Right">
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Title="Приложение" Height="850" Width="1300" MinWidth="800" MinHeight="500">
+    <DockPanel Margin="16" LastChildFill="True">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+            <Button Content="Выход" Padding="10,6" MinWidth="88" Click="Button_exit_user" DockPanel.Dock="Left"/>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Run Text="Добро пожаловать: "/>
                 <Run Name="BoxUserName"/>
             </TextBlock>
-            <StackPanel>
-                
-            </StackPanel>
+            <StackPanel/>
         </DockPanel>
-        <StackPanel Name="PanelBottomButton" Orientation="Horizontal" DockPanel.Dock="Bottom">
+        <StackPanel Name="PanelBottomButton" Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="0,16,0,0">
             <StackPanel Name="PanelBottomAdmin" Orientation="Horizontal">
-                <Button Content="Добавить" Width="80" Margin="5" Click="Button_add_product"/>
-                <Button Content="Удалить" Width="80" Margin="5" Click="Buutton_delite_product"/>
+                <Button Content="Добавить" Width="88" Padding="10,6" Margin="0,0,8,0" Click="Button_add_product"/>
+                <Button Content="Удалить" Width="88" Padding="10,6" Margin="0,0,8,0" Click="Buutton_delite_product"/>
             </StackPanel>
-            <Button Name="PanelRequestBottom" Content="Заявки" Width="80" Margin="5" Click="Button_request"/>
+            <Button Name="PanelRequestBottom" Content="Заявки" Width="88" Padding="10,6" Click="Button_request"/>
         </StackPanel>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5" Name="PanelFind">
-                <TextBox Width="100" Name="BoxFind" TextChanged="BoxFind_TextChanged"/>
-                <TextBlock Text="Поиск" Margin=" 5 0 5 0"/>
-                <ComboBox Name="ComboBoxItem" SelectedIndex="0" Width="100" SelectionChanged="ComboSuppliers_SelectionChanged"/>
-                <RadioButton Content="по возрастанию" Margin="5 0 5 0"
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8" Name="PanelFind">
+                <TextBox Width="120" Name="BoxFind" Padding="6,4" Margin="0,0,8,0" TextChanged="BoxFind_TextChanged"/>
+                <TextBlock Text="Поиск" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <ComboBox Name="ComboBoxItem" SelectedIndex="0" Width="160" Padding="6,4" Margin="0,0,8,0" SelectionChanged="ComboSuppliers_SelectionChanged"/>
+                <RadioButton Content="по возрастанию" Margin="0,0,8,0"
                              Checked="RadioUpp_Checked"
-                             IsChecked="True"/>
+                             IsChecked="True" VerticalAlignment="Center"/>
                 <RadioButton Content="по убыванию"
-                             Checked="RadioUpp_Checked"/>
+                             Checked="RadioUpp_Checked" VerticalAlignment="Center"/>
             </StackPanel>
-            <ListBox Name="BoxProduct" Width="1240" Height="730"/>
-        </StackPanel>
+            <ListBox Name="BoxProduct" Margin="0,8,0,0" MinHeight="400" Padding="4"/>
+        </DockPanel>
     </DockPanel>
 </Window>
