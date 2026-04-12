@@ -41,6 +41,7 @@ public partial class DemoContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=localhost,1433;Database=DemoBD;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True");
     //=> optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=DemoBD;Trusted_Connection=True;TrustServerCertificate=True");
+    //=> optionsBuilder.UseSqlServer("Data Source=dbsrv\\ag2024;Initial Catalog=PakSA_2207d1_220925;Trusted_Connection=True;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
