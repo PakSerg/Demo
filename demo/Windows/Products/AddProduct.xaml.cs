@@ -85,23 +85,34 @@ namespace demo.Windows.Products
 
             if (openFile.ShowDialog() == true)
             {
-                Uri uri = new Uri(openFile.FileName);
-
-                BitmapImage select = new(uri);
-                if (select.Width > 400 || select.Height > 300)
+                try
                 {
-                    MessageBox.Show("Размеры изображения имеют не верный формат");
-                    return;
+                    BitmapImage select = new();
+                    select.BeginInit();
+                    select.UriSource = new Uri(openFile.FileName);
+                    select.CacheOption = BitmapCacheOption.OnLoad;
+                    select.EndInit();
+                    select.Freeze();
+
+                    if (select.Width > 400 || select.Height > 300)
+                    {
+                        MessageBox.Show("Размеры изображения имеют не верный формат");
+                        return;
+                    }
+
+                    string imagesDir = Path.Combine(projPath, "Images");
+                    Directory.CreateDirectory(imagesDir);
+                    string destPath = Path.Combine(imagesDir, openFile.SafeFileName);
+                    File.Copy(openFile.FileName, destPath, overwrite: true);
+
+                    selectImage = select;
+                    imageName = openFile.SafeFileName;
+                    BoxImage.Source = selectImage;
                 }
-
-                string imagesDir = Path.Combine(projPath, "Images");
-                Directory.CreateDirectory(imagesDir);
-                string destPath = Path.Combine(imagesDir, openFile.SafeFileName);
-                File.Copy(openFile.FileName, destPath, overwrite: true);
-
-                selectImage = select;
-                imageName = openFile.SafeFileName;
-                BoxImage.Source = selectImage;
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при загрузке изображения: {ex.Message}");
+                }
             }
         }
     }

@@ -31,10 +31,18 @@ namespace demo.Windows.RequestWin
 
         private List<Order> LoadOrders()
         {
-            return Context.Orders
-                .Include(q => q.PickupPoint)
-                .Include(q => q.Status)
-                .ToList();
+            try
+            {
+                return Context.Orders
+                    .Include(q => q.PickupPoint)
+                    .Include(q => q.Status)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке заявок: {ex.Message}");
+                return new List<Order>();
+            }
         }
 
         private void BoxProduct_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -63,22 +71,25 @@ namespace demo.Windows.RequestWin
         private void Buutton_delite_reques(object sender, RoutedEventArgs e)
         {
             Order prod = BoxOrder.SelectedItem as Order;
-            if (prod != null)
+            if (prod == null)
             {
-                var order = Context.OrderArticles.FirstOrDefault(q => q.ProductId == prod.Id) ?? null;
+                MessageBox.Show("Выберете заказ для удаления");
+                return;
+            }
 
-                var ordersArticles = Context.OrderArticles.Where(q=> q.Order == prod);
+            try
+            {
+                var ordersArticles = Context.OrderArticles.Where(q => q.Order == prod);
                 if (ordersArticles != null)
-                {
                     Context.OrderArticles.RemoveRange(ordersArticles);
-                }
+
                 Context.Orders.Remove(prod);
                 Context.SaveChanges();
                 BoxOrder.ItemsSource = LoadOrders();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Выберете заказ для удаления");
+                MessageBox.Show($"Ошибка при удалении заявки: {ex.Message}");
             }
         }
 

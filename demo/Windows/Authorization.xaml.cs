@@ -16,19 +16,26 @@ namespace demo.Windows
 
         private void Button_authorization(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrWhiteSpace(BoxLogin.Text) && !string.IsNullOrWhiteSpace(BoxPassword.Text))
+            if (!string.IsNullOrWhiteSpace(BoxLogin.Text) && !string.IsNullOrWhiteSpace(BoxPassword.Text))
             {
-                User user = context.Users.FirstOrDefault(q => q.Login == BoxLogin.Text && q.Password == BoxPassword.Text);
-                if (user != null)
+                try
                 {
-                    user.RoleNavigation = context.Roles.FirstOrDefault(q => q.Id == user.Role);
-                    Main main = new Main(user);
-                    main.Show();
-                    this.Close();
+                    User user = context.Users.FirstOrDefault(q => q.Login == BoxLogin.Text && q.Password == BoxPassword.Text);
+                    if (user != null)
+                    {
+                        user.RoleNavigation = context.Roles.FirstOrDefault(q => q.Id == user.Role);
+                        Main main = new Main(user);
+                        main.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Пользователь не найден");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Пользователь не найден");
+                    MessageBox.Show($"Ошибка при авторизации: {ex.Message}");
                 }
             }
             else

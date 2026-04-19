@@ -68,19 +68,12 @@ namespace demo.Windows
 
         private void DrawProductItem(List<Product> product)
         {
-            if(BoxProduct != null)
+            if (BoxProduct == null || products == null) return;
+            BoxProduct.Items.Clear();
+            foreach (var item in products)
             {
-                BoxProduct.Items.Clear();
-                //BoxProduct.ItemsSource = product.Select(p => new ItemProduct(p));
-                foreach (var item in products)
-                {
-                    if (item != null)
-                    {
-                        ItemProduct xml = new ItemProduct(item);
-
-                        BoxProduct.Items.Add(xml);
-                    }
-                }
+                if (item != null)
+                    BoxProduct.Items.Add(new ItemProduct(item));
             }
         }
 
@@ -94,13 +87,20 @@ namespace demo.Windows
         private void BoxProduct_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListBox list = sender as ListBox;
-            ItemProduct controller = list.SelectedItem as ItemProduct;
+            ItemProduct controller = list?.SelectedItem as ItemProduct;
+            if (controller == null) return;
             Product product = controller.DataContext as Product;
-            EditProduct edit = new EditProduct(product);
+            if (product == null) return;
 
-            if (edit.ShowDialog() == true)
+            try
             {
-                DrawProductItem(products);
+                EditProduct edit = new EditProduct(product);
+                if (edit.ShowDialog() == true)
+                    Sort();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при открытии редактирования: {ex.Message}");
             }
         }
 
@@ -155,55 +155,71 @@ namespace demo.Windows
 
         public void Sort()
         {
-            products = context.Products.Include(q => q.Supplier)
-                .Include(q => q.Manufacturer)
-                .Include(q => q.Name)
-                .Include(q => q.Category)
-                .ToList();
-
-            products = products.Where(q =>
-                (q.Description?.Contains(BoxFind.Text) ?? false)
-                || (q.Article?.Contains(BoxFind.Text) ?? false)
-                || (q.Name?.Name?.Contains(BoxFind.Text) ?? false)
-                ).Where(q => q.Supplier.Name == FiltParam
-                || FiltParam == "все поставщики").ToList();
-
-            if (SortParam == "по возрастанию")
+            try
             {
-                products = products.OrderBy(q => q.Count).ToList();
-            }
-            else if (SortParam == "по убыванию")
-            {
-                products = products.OrderByDescending(q => q.Count).ToList();
-            }
+                context = new DemoContext();
+                products = context.Products.Include(q => q.Supplier)
+                    .Include(q => q.Manufacturer)
+                    .Include(q => q.Name)
+                    .Include(q => q.Category)
+                    .ToList();
 
-            DrawProductItem(products);
+                products = products.Where(q =>
+                    (q.Description?.Contains(BoxFind.Text) ?? false)
+                    || (q.Article?.Contains(BoxFind.Text) ?? false)
+                    || (q.Name?.Name?.Contains(BoxFind.Text) ?? false)
+                    ).Where(q => q.Supplier?.Name == FiltParam
+                    || FiltParam == "все поставщики").ToList();
+
+                if (SortParam == "по возрастанию")
+                    products = products.OrderBy(q => q.Count).ToList();
+                else if (SortParam == "по убыванию")
+                    products = products.OrderByDescending(q => q.Count).ToList();
+
+                DrawProductItem(products);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке товаров: {ex.Message}");
+            }
         }
 
         private void Buutton_delite_product(object sender, RoutedEventArgs e)
         {
-            Product prod = (Product)(BoxProduct.SelectedItem as ItemProduct).DataContext;
-            if (prod != null)
+            Product displayedProd = (BoxProduct.SelectedItem as ItemProduct)?.DataContext as Product;
+            if (displayedProd == null)
             {
-                var order = context.OrderArticles.FirstOrDefault(q => q.ProductId == prod.Id);
+                MessageBox.Show("Выберете продукт для удаления");
+                return;
+            }
 
+            try
+            {
+                var order = context.OrderArticles.FirstOrDefault(q => q.ProductId == displayedProd.Id);
                 if (order != null)
                 {
                     MessageBox.Show("Продукт не можен быть удален, он участвует в заказе");
                     return;
                 }
+
+                Product prod = context.Products.Find(displayedProd.Id);
+                if (prod == null) return;
+
                 context.Products.Remove(prod);
                 context.SaveChanges();
-                products = context.Products.ToList();
-                DrawProductItem(products);
-                if (prod.ImagePath != null)
+
+                if (!string.IsNullOrWhiteSpace(displayedProd.ImagePath))
                 {
-                    File.Delete(Path.Combine(projPath,"Images", prod.ImagePath));
+                    string fullImagePath = Path.Combine(projPath, "Images", displayedProd.ImagePath);
+                    if (File.Exists(fullImagePath))
+                        File.Delete(fullImagePath);
                 }
+
+                Sort();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Выберете продукт для удаления");
+                MessageBox.Show($"Ошибка при удалении товара: {ex.Message}");
             }
         }
     }
