@@ -1,0 +1,25 @@
+
+
+Два знака после запятой
+
+В коде:
+BoxNewPrice.Text = newPrice.ToString("F2");
+BoxNewPrice.Text = $"{newPrice:F2}";
+BoxNewPrice.Text = $"{newPrice:F2} ₽";
+
+В разметке:
+<Run Text="{Binding Price, StringFormat={}{0:F2}}" Name="BoxPrice"/>
+<Run Text="{Binding Price, StringFormat={}{0:F2} ₽}" Name="BoxPrice"/>
+
+
+Как работать с Grid:
+<Grid Name="ProductRow">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition></ColumnDefinition>
+        <ColumnDefinition></ColumnDefinition>
+        <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    
+<Border
+        BorderThickness="1"
+        Grid.Column="0"
