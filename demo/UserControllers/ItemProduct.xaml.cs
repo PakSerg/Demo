@@ -22,13 +22,23 @@ namespace demo.UserControllers
             Uri uri = new Uri(path);
             try
             {
-                BitmapImage bitmap = new(uri);
+                BitmapImage bitmap = new();
+                bitmap.BeginInit();
+                bitmap.UriSource = uri;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                bitmap.Freeze();
                 BoxImage.Source = bitmap;
             }
             catch (Exception ex)//любая ошибка с изобращением
             {
                 Console.WriteLine(ex.Message);
-                BitmapImage bitmap = new(new Uri(Path.Combine(projPath, "Images", "Defaults", "picture.png")));
+                BitmapImage bitmap = new();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(Path.Combine(projPath, "Images", "Defaults", "picture.png"));
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                bitmap.Freeze();
                 BoxImage.Source = bitmap;
             }
 

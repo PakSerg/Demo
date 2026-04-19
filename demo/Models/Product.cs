@@ -39,6 +39,4 @@ public partial class Product
 
     public virtual Supplier? Supplier { get; set; }
 
-    public string? Commentрт { get; set; }
-
 }

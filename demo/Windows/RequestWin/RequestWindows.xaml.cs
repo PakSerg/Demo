@@ -16,11 +16,7 @@ namespace demo.Windows.RequestWin
             InitializeComponent();
             Context = new DemoContext();
 
-            List<Order> orders = Context.Orders
-                .Include(q => q.PickupPoint)
-                .Include(q => q.Status)
-                .ToList();
-            BoxOrder.ItemsSource = Context.Orders.ToList();
+            BoxOrder.ItemsSource = LoadOrders();
 
             if (user.RoleNavigation.Role1 == "Администратор")
             {
@@ -33,6 +29,14 @@ namespace demo.Windows.RequestWin
             }
         }
 
+        private List<Order> LoadOrders()
+        {
+            return Context.Orders
+                .Include(q => q.PickupPoint)
+                .Include(q => q.Status)
+                .ToList();
+        }
+
         private void BoxProduct_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Order order = BoxOrder.SelectedItem as Order;
@@ -42,7 +46,7 @@ namespace demo.Windows.RequestWin
 
                 if (edit.ShowDialog() == true)
                 {
-                    BoxOrder.ItemsSource = Context.Orders.ToList();
+                    BoxOrder.ItemsSource = LoadOrders();
                 }
             }
         }
@@ -52,7 +56,7 @@ namespace demo.Windows.RequestWin
             AddRequest add = new AddRequest();
             if(add.ShowDialog() == true)
             {
-                BoxOrder.ItemsSource = Context.Orders.ToList();
+                BoxOrder.ItemsSource = LoadOrders();
             }
         }
 
@@ -70,7 +74,7 @@ namespace demo.Windows.RequestWin
                 }
                 Context.Orders.Remove(prod);
                 Context.SaveChanges();
-                BoxOrder.ItemsSource = Context.Orders.ToList();
+                BoxOrder.ItemsSource = LoadOrders();
             }
             else
             {

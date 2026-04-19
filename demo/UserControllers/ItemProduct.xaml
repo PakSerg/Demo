@@ -69,7 +69,7 @@
                     <Run Text="Количество на складе: "/>
                     <Run Text="{Binding Count}"/>
                 </TextBlock>
-                <TextBlock FontSize="16" Name="BoxCount">
+                <TextBlock FontSize="16" Name="BoxComment">
                     <Run Text="Комментарий: "/>
                     <Run Text="{Binding Comment}"/>
                 </TextBlock>

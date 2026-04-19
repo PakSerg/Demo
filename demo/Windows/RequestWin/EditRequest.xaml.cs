@@ -16,8 +16,11 @@ namespace demo.Windows.RequestWin
             context = new DemoContext();
             PanelOrder.DataContext = order;
             this.order = order;
-            BoxStatus.ItemsSource = context.Statuses.ToList();
-            BoxStatus.SelectedItem = order.Status;
+            var statuses = context.Statuses.ToList();
+            BoxStatus.ItemsSource = statuses;
+            int? statusId = order.StatusId ?? order.Status?.Id;
+            if (statusId.HasValue)
+                BoxStatus.SelectedItem = statuses.FirstOrDefault(s => s.Id == statusId.Value);
             var pickupPoints = context.PickupPoints.OrderBy(p => p.Adress).ToList();
             BoxPickupPoint.ItemsSource = pickupPoints;
             int? pickupId = order.PickupPointId ?? order.PickupPoint?.Id;
