@@ -2,7 +2,6 @@
 using demo.Models;
 using demo.UserControllers;
 using demo.Windows.Products;
-using demo.Windows.RequestWin;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection;
@@ -110,15 +109,6 @@ namespace demo.Windows
             if (add.ShowDialog() == true)
             {
                 Sort();
-            }
-        }
-
-        private void Button_request(object sender, RoutedEventArgs e)
-        {
-            RequestWindows request = new RequestWindows(currentUser);
-            if (request.ShowDialog() == true)
-            {
-
             }
         }
 

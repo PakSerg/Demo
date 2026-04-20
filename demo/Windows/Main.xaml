@@ -23,7 +23,6 @@
                 <Button Content="Добавить" Width="88" Padding="10,6" Margin="0,0,8,0" Click="Button_add_product"/>
                 <Button Content="Удалить" Width="88" Padding="10,6" Margin="0,0,8,0" Click="Buutton_delite_product"/>
             </StackPanel>
-            <Button Name="PanelRequestBottom" Content="Заявки" Width="88" Padding="10,6" Click="Button_request"/>
         </StackPanel>
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8" Name="PanelFind">
